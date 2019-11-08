@@ -46,7 +46,8 @@ Open the truck_streams.ksql file in a text editor and walk through each section,
 ```Select * from TRUCK_ENGINE_SENSORS;```
 
 Then show that TRUCK_1_ENGINE_SENSORS is getting data to it.
-Select * from TRUCK_1_ENGINE_SENSORS;
+
+```Select * from TRUCK_1_ENGINE_SENSORS;```
 
 7. In a fresh console run 
 ```node kafkajs-vis-server.js```
