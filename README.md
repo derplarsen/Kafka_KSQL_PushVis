@@ -2,7 +2,7 @@ This assumes you've run Confluent tarball (or have another Confluent Kafka envir
 
 https://docs.confluent.io/current/quickstart/ce-quickstart.html
 
-#How to get up and running:
+# How to get up and running:
 1. Fire up iTerm2 and 
 
 ```cd ~/Confluent/confluent-5.3.1```
