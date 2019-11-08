@@ -53,4 +53,5 @@ Then show that TRUCK_1_ENGINE_SENSORS is getting data to it.
 ```node kafkajs-vis-server.js```
 
 8. Open the web page and watch the data roll in
-```Stop/Start producer as desired```
+
+<b>(Stop/Start producer as desired)</b>
