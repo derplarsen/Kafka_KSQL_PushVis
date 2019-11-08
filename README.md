@@ -1,5 +1,5 @@
 1. Fire up iTerm2 and 
-cd ~/Confluent/confluent-5.3.1
+`cd ~/Confluent/confluent-5.3.1`
 
 2. Fire up another iTerm2 and 
 cd ~/kafkavis/truck_sensors/producers
