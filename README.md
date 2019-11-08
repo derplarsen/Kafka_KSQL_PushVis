@@ -4,15 +4,19 @@
 
 
 2. Fire up another iTerm2 and 
-cd ~/kafkavis/truck_sensors/producers
+
+```cd ~/kafkavis/truck_sensors/producers```
 
 3. In iTerm2, go to Shell / Split Horizontally and
-cd ~/Confluent/confluent-5.3.1
+
+```cd ~/Confluent/confluent-5.3.1```
+
 ..then..
-bin/kafka-topics --create --topic TRUCK_ENGINE_SENSORS --replication-factor 1 --partitions 1 --bootstrap-server localhost:9092
+
+```bin/kafka-topics --create --topic TRUCK_ENGINE_SENSORS --replication-factor 1 --partitions 1 --bootstrap-server localhost:9092
 bin/kafka-topics --create --topic TRUCK_1_SENSORS --replication-factor 1 --partitions 1 --bootstrap-server localhost:9092
 bin/kafka-topics --create --topic TRUCK_2_SENSORS --replication-factor 1 --partitions 1 --bootstrap-server localhost:9092
-bin/kafka-topics --create --topic TRUCK_3_SENSORS --replication-factor 1 --partitions 1 --bootstrap-server localhost:9092
+bin/kafka-topics --create --topic TRUCK_3_SENSORS --replication-factor 1 --partitions 1 --bootstrap-server localhost:9092```
 
 4. In same iTerm2 run..
 bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic TRUCK_ENGINE_SENSORS --from-beginning
