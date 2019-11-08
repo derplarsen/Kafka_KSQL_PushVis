@@ -54,4 +54,4 @@ Then show that TRUCK_1_ENGINE_SENSORS is getting data to it.
 
 8. Open the web page and watch the data roll in
 
-<b>(Stop/Start producer as desired)</b>
+<b>(Stop/Start producer as desired with buttons)</b>
