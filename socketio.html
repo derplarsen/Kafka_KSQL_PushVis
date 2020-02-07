@@ -1,0 +1,368 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>KSQL Vis Example</title>
+	<script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/min/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+	<script src="./dist/chartjs-plugin-streaming.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<style>
+
+	textarea {
+    background-color: #000;
+    border: 1px solid #000;
+    color: #00ff00;
+    padding: 8px;
+    font-family: courier new;
+		border-radius: 5px;
+	}
+
+	input {
+		color: #000;
+	}
+
+	input:focus {
+    background-color: black;
+		font-family: courier new;
+		color: #00ff00;
+  }
+
+	.startbutton {
+	  display: inline-block;
+	  padding: 5px 10px;
+	  font-size: 16px;
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  outline: none;
+	  color: #fff;
+	  background-color: #4CAF50;
+	  border: none;
+	  border-radius: 7px;
+	  box-shadow: 0 4px #999;
+	}
+
+	.startbutton:hover {background-color: #3e8e41}
+
+	.startbutton:active {
+	  background-color: #3e8e41;
+	  box-shadow: 0 2px #666;
+	  transform: translateY(4px);
+	}
+
+	.stopbutton {
+	  display: inline-block;
+	  padding: 5px 10px;
+	  font-size: 16px;
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  outline: none;
+	  color: #fff;
+	  background-color: #d04a32;
+	  border: none;
+	  border-radius: 7px;
+	  box-shadow: 0 4px #999;
+	}
+
+	.stopbutton:hover {background-color: #bf351d}
+
+	.stopbutton:active {
+	  background-color: #bf351d;
+	  box-shadow: 0 2px #666;
+	  transform: translateY(4px);
+	}
+
+	#startproduce_btn {
+		position:absolute;
+		top:0;
+		right:0;
+		margin-right: 20px;
+		margin-top: 70px;
+	}
+
+	#stopproduce_btn {
+		position:absolute;
+		top:0;
+		right:0;
+		margin-right: 20px;
+		margin-top: 120px;
+	}
+
+	</style>
+	<script>
+	      var socket = io.connect('http://localhost:33334');
+
+	      $(document).ready(function(){
+	        $('#webcmd').click(function() {
+	          //console.log('derp');
+	          socket.emit('webcmd','ls -al | grep js');
+	        });
+					$('#input_cmd').on("keyup", function(e) {
+					    if (e.keyCode == 13) {
+								socket.emit('webcmd',$('#input_cmd').val());
+					      console.log('cmd',$('#input_cmd').val());
+					    }
+					});
+
+					$('#startproduce_btn').click(function() {
+	          socket.emit('sendcmd_btn','startproduce');
+	        });
+
+					$('#stopproduce_btn').click(function() {
+	          socket.emit('sendcmd_btn','stopproduce');
+	        });
+
+	      });
+
+				socket.on('webcmd_out', function(data, callback) {
+					//var str = data.replace(/(?:\r\n|\r|\n)/g, '<br>');
+					$('#webcmd_out_box').val(data);
+					document.getElementById("webcmd_out_box").scrollTop = document.getElementById("webcmd_out_box").scrollHeight
+				})
+
+        var timeoutIDs = [];
+
+				socket.on('TRUCK_1_SENSORS', function(data, callback) {
+	          var truckdata_json=JSON.parse(data);
+	          console.log('json data:',JSON.parse(data))
+	          console.log('text data:', data)
+	          //$('#textdisplay').append(data+'<br>')
+	          $('#truck1div').append('time: '+truckdata_json.READTIME+', temp: '+truckdata_json.ENGINE_TEMPERATURE+'<br>');
+
+						window.myChart.config.data.datasets[0].data.push({
+							x: truckdata_json.READTIME,
+							y: truckdata_json.ENGINE_TEMPERATURE
+						});
+						window.myChart.update({
+							preservation: true
+						});
+
+						function onReceive(event) {
+						}
+
+						var receive = function(index) {
+							onReceive({
+								index: index,
+								timestamp: truckdata_json.READTIME,
+								value: truckdata_json.ENGINE_TEMPERATURE
+							});
+						}
+						timeoutIDs[0] = setTimeout(receive, Math.random() * 1000 + 500);
+	      })
+
+				socket.on('TRUCK_2_SENSORS', function(data, callback) {
+	          var truckdata_json=JSON.parse(data);
+	          console.log('json data:',JSON.parse(data))
+	          console.log('text data:', data)
+	          //$('#textdisplay').append(data+'<br>')
+	          $('#truck2div').append('time: '+truckdata_json.READTIME+', temp: '+truckdata_json.ENGINE_TEMPERATURE+'<br>');
+
+						window.myChart.config.data.datasets[1].data.push({
+							x: truckdata_json.READTIME,
+							y: truckdata_json.ENGINE_TEMPERATURE
+						});
+						window.myChart.update({
+							preservation: true
+						});
+
+						function onReceive(event) {
+						}
+
+						var receive = function(index) {
+							onReceive({
+								index: index,
+								timestamp: truckdata_json.READTIME,
+								value: truckdata_json.ENGINE_TEMPERATURE
+							});
+						}
+						timeoutIDs[1] = setTimeout(receive, Math.random() * 1000 + 500);
+	      })
+
+				socket.on('TRUCK_3_SENSORS', function(data, callback) {
+	          var truckdata_json=JSON.parse(data);
+	          console.log('json data:',JSON.parse(data))
+	          console.log('text data:', data)
+	          //$('#textdisplay').append(data+'<br>')
+	          $('#truck3div').append('time: '+truckdata_json.READTIME+', temp: '+truckdata_json.ENGINE_TEMPERATURE+'<br>');
+
+						window.myChart.config.data.datasets[2].data.push({
+							x: truckdata_json.READTIME,
+							y: truckdata_json.ENGINE_TEMPERATURE
+						});
+						window.myChart.update({
+							preservation: true
+						});
+
+						function onReceive(event) {
+						}
+
+						var receive = function(index) {
+							onReceive({
+								index: index,
+								timestamp: truckdata_json.READTIME,
+								value: truckdata_json.ENGINE_TEMPERATURE
+							});
+						}
+						timeoutIDs[2] = setTimeout(receive, Math.random() * 1000 + 500);
+	      })
+
+	</script>
+	<style>
+		canvas {
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+		.chart {
+			margin: auto;
+			width: 75%;
+		}
+		.text-center {
+			text-align: center;
+		}
+	</style>
+	<link rel="shortcut icon" type="image/png" href="favicon.ico">
+</head>
+
+<body>
+	<div class="chart">
+		<canvas id="myChart"></canvas>
+	</div>
+	<div align=center>
+		<table width="75%">
+			<tr>
+				<td>
+					<p class="text-center">
+
+					</p>
+				</td>
+				<td style="width: 100%">
+					<p class="text-center">
+						<input id="input_cmd" class="w3-input" size="100"></input>
+
+					</p>
+				</td>
+				<td style="width: 100%">
+					<p class="text-center">
+
+					</p>
+				</td>
+
+			</tr>
+			<tr>
+				<td>
+					<p class="text-center">
+						<div id="sensors"></div>
+					</p>
+				</td>
+				<td>
+					<p class="text-center" style="margin-top:0px">
+						Command output:<br><textarea id="webcmd_out_box" style="width:100%" rows="16"></textarea>
+					</p>
+				</td>
+				<td align=center valign=top style="width: 200px">
+					<p class="text-center">
+						<button id="startproduce_btn" class="startbutton">Start Produce</button><br>
+						<button id="stopproduce_btn" class="stopbutton">Stop Produce</button><br>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<script>
+		var chartColors = {
+			red: 'rgb(255, 99, 132)',
+			orange: 'rgb(255, 159, 64)',
+			yellow: 'rgb(255, 205, 86)',
+			green: 'rgb(75, 192, 192)',
+			blue: 'rgb(54, 162, 235)',
+			purple: 'rgb(153, 102, 255)',
+			grey: 'rgb(201, 203, 207)'
+		};
+
+		function randomScalingFactor() {
+			return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+		}
+
+		function startFeed(index) {
+		}
+
+		function stopFeed(index) {
+			clearTimeout(timeoutIDs[index]);
+		}
+
+		var color = Chart.helpers.color;
+		var config = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: 'Truck 1 (linear interpolation)',
+					backgroundColor: color(chartColors.red).alpha(0.5).rgbString(),
+					borderColor: chartColors.red,
+					fill: false,
+					lineTension: 0,
+					borderDash: [8, 4],
+					data: []
+				}, {
+					label: 'Truck 2 (cubic interpolation)',
+					backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
+					borderColor: chartColors.blue,
+					fill: false,
+					cubicInterpolationMode: 'monotone',
+					data: []
+				}, {
+					label: 'Truck 3 (default interpolation)',
+					backgroundColor: color(chartColors.orange).alpha(0.5).rgbString(),
+					borderColor: chartColors.orange,
+					fill: true,
+					cubicInterpolationMode: 'default',
+					data: []
+				}]
+			},
+			options: {
+				title: {
+					display: true,
+					text: 'Truck Sensor Data Feed Example'
+				},
+				scales: {
+					xAxes: [{
+						type: 'realtime',
+						realtime: {
+							duration: 20000,
+							delay: 2000,
+						}
+					}],
+					yAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: 'value'
+						}
+					}]
+				},
+				tooltips: {
+					mode: 'nearest',
+					intersect: false
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: false
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('myChart').getContext('2d');
+			window.myChart = new Chart(ctx, config);
+		};
+
+		var colorNames = Object.keys(chartColors);
+	</script>
+
+</body>
+
+</html>

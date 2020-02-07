@@ -1,0 +1,71 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.description {
+  text-align: center;
+  color: white;
+  margin-bottom: 50px;
+}
+
+h1 {
+  font-weight: 300;
+  color: white;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+  justify-content: center;
+}
+
+.input-field {
+  position: relative;
+  -moz-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  height: 5vw;
+  width: 70%;
+  background-color: whitesmoke;
+  padding: .5vw;
+  box-sizing: border-box;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px;
+}
+.input-field .editable, .input-field .suggested {
+  display: inline-block;
+  /* border: 1px solid black; */
+  font-size: 2.5vw;
+  margin: 0;
+  padding: 0;
+}
+.input-field .editable {
+  background-color: transparent;
+  outline: none;
+  min-width: 1px;
+}
+.input-field .suggested {
+  color: #A9A9A9;
+  pointer-events: none;
+  white-space: pre;
+}
+.input-field.focus {
+  -moz-box-shadow: 0 0 1vw #51cbee;
+  -webkit-box-shadow: 0 0 1vw #51cbee;
+  box-shadow: 0 0 1vw #51cbee;
+}
+.input-field:hover {
+  cursor: text;
+}
