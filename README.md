@@ -50,9 +50,7 @@ bin/kafka-topics --create --topic TRUCK_3_SENSORS --replication-factor 1 --parti
 
 ```ksql```
 
-..then..
-
-Open the `truck_streams.ksql` file in a text editor and walk through each section via the KSQL CLI, copy/paste into ksql and run, ensure each is successful.
+..then, open the `truck_streams.ksql` file in a text editor and walk through each section via the KSQL CLI, copy/paste into ksql and run, ensure each is successful.
 
 6. Run a select query on the ingest topic and produce data, see it coming through
 
