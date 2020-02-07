@@ -1,3 +1,10 @@
+# Summary:
+
+This project is a quick example of how to get data out of kafka in realtime, do some stream processing to make it more effective in charts, and then PUSH it to a web client, rather than the old paradigm of *pull* and *batch*. 
+
+This example uses Websockets (Socket.io NPM), however I have also implemented this in Server Sent Events, which I will probably integrate into this repo so you can run either/both depending on your requirements.
+
+
 This assumes you've run Confluent tarball (or have another Confluent Kafka environment running). It's assumes non-secured cluster and thus a non-SASL client config, in the client config of `kafkajs-vis-server.js` you'll see a commented section for if you do need to specify jaas config. 
 
 https://docs.confluent.io/current/quickstart/ce-quickstart.html
