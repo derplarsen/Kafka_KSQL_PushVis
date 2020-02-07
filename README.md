@@ -1,20 +1,20 @@
-This assumes you've run Confluent tarball (or have another Confluent Kafka environment running):
+This assumes you've run Confluent tarball (or have another Confluent Kafka environment running). It's assumes non-secured cluster and thus a non-SASL client config, in the client config of `kafkajs-vis-server.js` you'll see a commented section for if you do need to specify jaas config. 
 
 https://docs.confluent.io/current/quickstart/ce-quickstart.html
 
 # How to get up and running:
-1. Fire up iTerm2 and 
+1. Fire up iTerm2 and go into your confluent home directory (in this case 5.4.0 tarball).
 
-```cd ~/Confluent/confluent-5.3.1```
+```cd ~/Confluent/confluent-5.4.0```
 
 
-2. Fire up another iTerm2 and 
+2. Fire up another iTerm2 and go into 
 
 ```cd ~/kafkavis/truck_sensors/producers```
 
 3. In iTerm2, go to Shell / Split Horizontally and
 
-```cd ~/Confluent/confluent-5.3.1```
+```cd ~/Confluent/confluent-5.4.0```
 
 ..then..
 
@@ -39,7 +39,7 @@ bin/kafka-topics --create --topic TRUCK_3_SENSORS --replication-factor 1 --parti
 
 ..then..
 
-Open the truck_streams.ksql file in a text editor and walk through each section, copy/paste into ksql and run, ensure each is successful
+Open the truck_streams.ksql file in a text editor and walk through each section via the KSQL CLI, copy/paste into ksql and run, ensure each is successful.
 
 6. Run a select query on the ingest topic and produce data, see it coming through
 
@@ -52,6 +52,11 @@ Then show that TRUCK_1_ENGINE_SENSORS is getting data to it.
 7. In a fresh console run 
 ```node kafkajs-vis-server.js```
 
-8. Open the web page and watch the data roll in
+8. Open the web page (index.html) and watch the data roll in
 
-<b>(Stop/Start producer as desired with buttons)</b>
+
+
+<b>Note also for showing how bidirectinal websocket communication works - </b>
+
+1. Push the start/stop producing buttons and look at correspending code in kafkajs-vis-server.js 
+2. Click into the input field under the vis run a command like `ls` and hit enter.. show that we can execute commands on the remote system (that's how start/stop producer runs). 
