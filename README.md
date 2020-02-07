@@ -5,11 +5,13 @@ This project is a quick example of how to get data out of kafka in realtime, do 
 This example uses Websockets (Socket.io NPM), however I have also implemented this in Server Sent Events, which I will probably integrate into this repo so you can run either/both depending on your requirements.
 
 
+
+# How to get up and running:
+
 This assumes you've run Confluent tarball (or have another Confluent Kafka environment running). It's assumes non-secured cluster and thus a non-SASL client config, in the client config of `kafkajs-vis-server.js` you'll see a commented section for if you do need to specify jaas config. 
 
 https://docs.confluent.io/current/quickstart/ce-quickstart.html
 
-# How to get up and running:
 1. Fire up iTerm2 and go into your confluent home directory (in this case 5.4.0 tarball).
 
 ```cd ~/Confluent/confluent-5.4.0```
