@@ -2,7 +2,7 @@
 
 This project is a quick example of how to get data out of kafka in realtime, do some stream processing to make it more effective in charts, and then PUSH it to a web client, rather than the old paradigm of *pull* and *batch*. 
 
-This example uses Websockets (Socket.io NPM), however I have also implemented this in Server Sent Events, which I will probably integrate into this repo so you can run either/both depending on your requirements.
+This example leverages __Websockets__ (Socket.io NPM), however I have also implemented this in Server Sent Events, which I will probably integrate into this repo so you can run either/both depending on your requirements.
 
 
 
