@@ -4,7 +4,7 @@ This project is a quick example of how to get data out of kafka in realtime, do 
 
 This example leverages __Websockets__ (Socket.io NPM), however I have also implemented this in *Server Sent Events*, which I will probably integrate into this repo so you can run either/both depending on your requirements.
 
-
+![Websocket Datavis architecture diagram](https://github.com/derplarsen/Kafka_KSQL_PushVis/raw/master/websocket_datavis.png)
 
 # Prereq's:
 
