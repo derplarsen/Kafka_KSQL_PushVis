@@ -12,7 +12,7 @@ This assumes you've run Confluent tarball (or have another Confluent Kafka envir
 
 https://docs.confluent.io/current/quickstart/ce-quickstart.html
 
-Make sure you have Node.js and NPM installed!
+__Make sure you have Node.js and NPM installed!__
 
 Install all NPM prereqs by running the following command while inside the cloned repo folder:
 
