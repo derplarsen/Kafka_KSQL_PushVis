@@ -6,7 +6,7 @@ This example leverages __Websockets__ (Socket.io NPM), however I have also imple
 
 
 
-# How to get up and running:
+# Prereq's:
 
 This assumes you've run Confluent tarball (or have another Confluent Kafka environment running). It's assumes non-secured cluster and thus a non-SASL client config, in the client config of `kafkajs-vis-server.js` you'll see a commented section for if you do need to specify jaas config. 
 
@@ -15,6 +15,8 @@ https://docs.confluent.io/current/quickstart/ce-quickstart.html
 Also, before running the following commands, install the required prerequists in node.js (__and also install the latest node.js + npm environment__) by entering the cloned directory and running:
 
 ```npm install```
+
+# Let's Go!
 
 1. Fire up a terminal and go into your confluent home directory (in this case 5.4.0 tarball).
 
