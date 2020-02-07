@@ -71,3 +71,7 @@ Then show that TRUCK_1_ENGINE_SENSORS is getting data to it due to the filtering
 
 1. Push the start/stop producing buttons and look at correspending code in kafkajs-vis-server.js 
 2. Click into the input field under the vis run a command like `ls` and hit enter.. show that we can execute commands on the remote system (that's how start/stop producer runs). 
+
+# Conclusion
+
+With this you can now go create a modern event-first visualization platform. Go forth and profit!
