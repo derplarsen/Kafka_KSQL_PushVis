@@ -18,6 +18,8 @@ Install all NPM prereqs by running the following command while inside the cloned
 
 ```npm install```
 
+NOTE: You shouldn't need to get anything extra for ChartJS Streaming Plugin; However, if you want to update it to latest, get it from here and put in the dist folder: https://github.com/nagix/chartjs-plugin-streaming
+
 # Let's Go!
 
 1. Fire up a terminal and go into your confluent home directory (in this case 5.4.0 tarball).
